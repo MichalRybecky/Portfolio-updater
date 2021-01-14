@@ -27,7 +27,7 @@ def get_urls() -> list:
 
 def get_prices() -> dict:
     """
-    returns list of dictionaries with ticker symbol and it's current price
+    returns dict of dictionaries with ticker symbol and it's current price
     """
     prices = {}
     for url in get_urls():
