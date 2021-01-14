@@ -35,7 +35,7 @@ if __name__ == "__main__":
     desktop = pyoo.Desktop("localhost", 2002)
     with open("file_location.txt", "r") as file:
         file_path = file.readline().strip()
-    doc = desktop.open_spreadsheet("/home/michal/Cloud Sync/Finance.xlsx")
+    doc = desktop.open_spreadsheet(file_path)
 
     # select desired sheet
     sheet = doc.sheets[5]
