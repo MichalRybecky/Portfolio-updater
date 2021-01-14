@@ -1,3 +1,4 @@
-# locate desired spreadsheet and write the location to the file_location.txt file
+#!/bin/bash
 locate Finance.xlsx > file_location.txt
+cd "${0%/*}"
 python3 app.py
