@@ -1,28 +1,49 @@
+"""
+main python file
+handles reading from and writing to calc spreadsheet
+"""
 import pyoo
 from time import sleep
 from subprocess import Popen
 from crawler import get_prices
 
 
-def write_to_cell(column: str, row, value):
-    location = column + str(row)
-    cell = active_sheet.getCellRangeByName(location)
-    cell.String = value
+def write_to_cell(row: int, column: int, value):
+    sheet[row, column].value = value
 
 
-def write_to_spreadsheet(stock_info: dict):
-    for i, stock in enumerate(stock_info):
-        write_to_cell('A', i+1, stock['ticker'])
-        write_to_cell('B', i+1, stock['price'])
+def check_tickers_in_file() -> list:
+    """
+    looks into the file and returns ticker symbols that are there
+    """
+    row = 4
+    tickers = []
+    while True:
+        current_value = sheet[row, 1].value
+        if current_value == "":
+            break
+        tickers.append({"ticker": current_value, "row": row})
+        row += 1
+    return tickers
 
-soffice = Popen(['sh', 'soffice.sh'])
-sleep(3)
 
-desktop = pyoo.Desktop('localhost', 2002)
-doc = desktop.open_spreadsheet("/home/michal/Cloud Sync/Finance.xlsx")
-sheet = doc.sheets[5]
+if __name__ == "__main__":
+    # run soffice script and detach it
+    soffice = Popen(["sh", "soffice.sh"])
+    sleep(1)
 
-sheet[0,0].value = 1
-# # Set cell formula and get value:
-# sheet[0,2].formula = '=$A$1+$B$1'
-print(sheet[0,0].value)
+    desktop = pyoo.Desktop("localhost", 2002)
+    with open("file_location.txt", "r") as file:
+        file_path = file.readline().strip()
+    doc = desktop.open_spreadsheet("/home/michal/Cloud Sync/Finance.xlsx")
+
+    # select desired sheet
+    sheet = doc.sheets[5]
+
+    # get dictionary from crawler module and tickers from file
+    stock_data = get_prices()
+    tickers_in_file = check_tickers_in_file()
+
+    for ticker in tickers_in_file:
+        ticker, row = ticker["ticker"], ticker["row"]
+        write_to_cell(row=row, column=2, value=stock_data[ticker])
