@@ -38,5 +38,6 @@ def get_prices() -> list:
             price = soup.find("span", attrs={"data-reactid": "32"}).text
         except AttributeError:
             price = "Unable to parse, check ticker!"
-        prices.append({"ticker": url["ticker"], "price": price})
+        prices.append({url['ticker']: price})
     return prices
+
