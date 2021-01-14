@@ -25,11 +25,11 @@ def get_urls() -> list:
     return urls
 
 
-def get_prices() -> list:
+def get_prices() -> dict:
     """
     returns list of dictionaries with ticker symbol and it's current price
     """
-    prices = []
+    prices = {}
     for url in get_urls():
         response = requests.get(url["url"])
         PAGE_HTML = response.text
@@ -38,6 +38,7 @@ def get_prices() -> list:
             price = soup.find("span", attrs={"data-reactid": "32"}).text
         except AttributeError:
             price = "Unable to parse, check ticker!"
-        prices.append({url['ticker']: price})
+        ticker_name = url['ticker']
+        prices.update({ticker_name: price})
     return prices
 
