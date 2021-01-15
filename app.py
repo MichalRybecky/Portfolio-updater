@@ -41,8 +41,8 @@ if __name__ == "__main__":
     sheet = doc.sheets[5]
 
     # get dictionary from crawler module and tickers from file
-    stock_data = get_prices()
     tickers_in_file = check_tickers_in_file()
+    stock_data = get_prices(tickers_in_file)
 
     for ticker in tickers_in_file:
         ticker, row = ticker["ticker"], ticker["row"]
