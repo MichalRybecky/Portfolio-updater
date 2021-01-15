@@ -8,12 +8,11 @@ import requests
 from bs4 import BeautifulSoup
 
 
-def get_urls() -> list:
+def get_urls(tickers_dict: dict) -> list:
     """
     returns list of dictionaries with ticker symbol and it's Yahoo Finance url
     """
-    with open("ticker-symbols.txt", "r") as file:
-        tickers = [line.strip().upper() for line in file]
+    tickers = [next(iter(ticker.values())) for ticker in tickers_dict]
     urls = []
     for ticker in tickers:
         urls.append(
@@ -25,12 +24,13 @@ def get_urls() -> list:
     return urls
 
 
-def get_prices() -> dict:
+def get_prices(tickers) -> dict:
     """
     returns dict of dictionaries with ticker symbol and it's current price
     """
     prices = {}
-    for url in get_urls():
+    urls = get_urls(tickers)
+    for url in urls:
         response = requests.get(url["url"])
         PAGE_HTML = response.text
         soup = BeautifulSoup(PAGE_HTML, "html.parser")
@@ -41,4 +41,3 @@ def get_prices() -> dict:
         ticker_name = url['ticker']
         prices.update({ticker_name: price})
     return prices
-
