@@ -13,7 +13,6 @@ def get_urls(tickers_dict: dict) -> list:
     returns list of dictionaries with ticker symbol and it's Yahoo Finance url
     """
     tickers = [ticker['ticker'] for ticker in tickers_dict]
-    print(tickers)
     urls = []
     for ticker in tickers:
         urls.append(
