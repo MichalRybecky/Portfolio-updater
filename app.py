@@ -47,3 +47,6 @@ if __name__ == "__main__":
     for ticker in tickers_in_file:
         ticker, row = ticker["ticker"], ticker["row"]
         write_to_cell(row=row, column=2, value=stock_data[ticker])
+
+    # save document
+    doc.save()
