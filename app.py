@@ -6,6 +6,7 @@ import pyoo
 from time import sleep
 from subprocess import Popen
 from crawler import get_prices
+from options import sheet_number, start_position
 
 
 def write_to_cell(row: int, column: int, value):
@@ -16,10 +17,11 @@ def check_tickers_in_file() -> list:
     """
     looks into the file and returns ticker symbols that are there
     """
-    row = 4
+    row = start_position[0]
+    column = start_position[1]
     tickers = []
     while True:
-        current_value = sheet[row, 1].value
+        current_value = sheet[row, column].value
         if current_value == "":
             break
         tickers.append({"ticker": current_value, "row": row})
@@ -38,7 +40,7 @@ if __name__ == "__main__":
     doc = desktop.open_spreadsheet(file_path)
 
     # select desired sheet
-    sheet = doc.sheets[5]
+    sheet = doc.sheets[sheet_number]
 
     # get dictionary from crawler module and tickers from file
     tickers_in_file = check_tickers_in_file()
@@ -46,7 +48,7 @@ if __name__ == "__main__":
 
     for ticker in tickers_in_file:
         ticker, row = ticker["ticker"], ticker["row"]
-        write_to_cell(row=row, column=2, value=stock_data[ticker])
+        write_to_cell(row=row, column=start_position[1] + 1, value=stock_data[ticker])
 
     # save document
     doc.save()

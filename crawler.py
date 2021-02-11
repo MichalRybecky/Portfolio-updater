@@ -35,7 +35,7 @@ def get_prices(tickers) -> dict:
         PAGE_HTML = response.text
         soup = BeautifulSoup(PAGE_HTML, "html.parser")
         try:
-            price = soup.find("span", attrs={"data-reactid": "32"}).text
+            price = soup.find("span", attrs={"class": "Trsdu(0.3s) Fw(b) Fz(36px) Mb(-4px) D(ib)"}).text
         except AttributeError:
             price = "Unable to parse, check ticker!"
         ticker_name = url['ticker']
