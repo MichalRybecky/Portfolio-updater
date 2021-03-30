@@ -6,7 +6,7 @@ import pyoo
 from time import sleep
 from subprocess import Popen
 from crawler import get_prices
-from options import sheet_number, start_position
+from options import sheet_number, start_position, path
 
 
 def write_to_cell(row: int, column: int, value):
