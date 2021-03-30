@@ -6,7 +6,7 @@ import pyoo
 from time import sleep
 from subprocess import Popen
 from crawler import get_prices
-from options import sheet_number, start_position, path
+from options import sheet_number, start_position, file_path
 
 
 def write_to_cell(row: int, column: int, value):
@@ -39,7 +39,7 @@ if __name__ == "__main__":
     desktop = pyoo.Desktop("localhost", 2002)
 
     # open file path imported from options.py
-    doc = desktop.open_spreadsheet(path)
+    doc = desktop.open_spreadsheet(file_path)
 
     # select desired sheet
     sheet = doc.sheets[sheet_number]
@@ -54,3 +54,4 @@ if __name__ == "__main__":
 
     # save document
     doc.save()
+
