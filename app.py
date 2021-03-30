@@ -32,6 +32,8 @@ def check_tickers_in_file() -> list:
 if __name__ == "__main__":
     # run soffice script and detach it
     soffice = Popen(["sh", "soffice.sh"])
+    # wait a little bit to make sure soffice is running properly before we do anything
+    # bump it up if you have problems or slower hardware
     sleep(1)
 
     desktop = pyoo.Desktop("localhost", 2002)
