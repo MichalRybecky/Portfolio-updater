@@ -26,7 +26,7 @@ So as a little project to learn more about python, web scraping and interaction 
 2. `cd Portfolio-updater`
 3. Open `options.py` file in your text editor.
 4. Change `file_path`, `sheet_number` and `start_position` according to your need. You can read what each option means in the file.
-5. 4. Allow execution of `run.sh` with `chmod +x run.sh`
+5. Allow execution of `run.sh` with `chmod +x run.sh`
 6. Go to home directory (`cd ~`) and open your `.bashrc` or `.bash_aliases` (where you configure your aliases)
 7. Add this line: `alias YOUR_ALIAS='/PATH/TO/REPOSITORY/run.sh & disown ; exit'` <br />
 Change YOUR_ALIAS with the command you want to use to run the script and /PATH/TO/REPOSITORY with full path of the repository you cloned.
