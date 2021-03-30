@@ -4,7 +4,7 @@ This module is for customizing different aspects of the app
 
 # Full path of the Calc file you want to work with
 # path = string
-path = ""
+file_path = ""
 
 # Sheet number that we want to work with
 # sheet_number = int
