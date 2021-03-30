@@ -6,7 +6,7 @@ This module is for customizing different aspects of the app
 # path = string
 path = ""
 
-# Number of sheet that we want to work with
+# Sheet number that we want to work with
 # sheet_number = int
 sheet_number = 1
 
